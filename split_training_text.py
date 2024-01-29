@@ -3,15 +3,18 @@ import random
 import pathlib
 import subprocess
 
-training_text_file = 'langdata/eng.training_text'
+
+
+training_text_file = r'D:\Projects\Tesseract Khmer Font Finetuning\tesseract_tutorial\langdata\eng.training_text'
 
 lines = []
 
-with open(training_text_file, 'r') as input_file:
+with open(training_text_file, 'r', encoding='utf-8') as input_file:
     for line in input_file.readlines():
         lines.append(line.strip())
 
-output_directory = 'tesstrain/data/Apex-ground-truth'
+
+output_directory = r'D:\Projects\Tesseract Khmer Font Finetuning\tesseract_tutorial\tesstrain\data\Apex-ground-truth'
 
 if not os.path.exists(output_directory):
     os.mkdir(output_directory)
@@ -33,7 +36,7 @@ for line in lines:
 
     subprocess.run([
         'text2image',
-        '--font=Apex',
+        '--font=Apex-Regular',
         f'--text={line_training_text}',
         f'--outputbase={output_directory}/{file_base_name}',
         '--max_pages=1',
@@ -43,7 +46,7 @@ for line in lines:
         '--ysize=480',
         '--char_spacing=1.0',
         '--exposure=0',
-        '--unicharset_file=langdata/eng.unicharset'
+        '--unicharset_file=/langdata/eng.unicharset'
     ])
 
     line_count += 1
